@@ -1,17 +1,3 @@
-//resource "google_compute_network" "our_development_network" {
-//  name ="devnetwork"
-//  auto_create_subnetworks=true // change to false then the whole network is to be removed
-//}
-
-resource "aws_vpc" "environment-example-two"{
-  cidr_block = "10.0.0.0/16"
-  enable_dns_support = true
-  enable_dns_hostnames = true
-  tags {
-    Name="terraform-aws-vpc-example-two"
-  }
-}
-
 resource "aws_subnet" "subnet1" {
   cidr_block="${cidrsubnet(aws_vpc.environment-example-two.cidr_block, 3, 1)}" //will be located in the vpc already created
   vpc_id="${aws_vpc.environment-example-two.id}" //if there is only one then use this id
